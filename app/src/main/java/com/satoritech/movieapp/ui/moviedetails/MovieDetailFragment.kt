@@ -41,13 +41,13 @@ class MovieDetailFragment : Fragment() {
         viewModel.movie.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    bindCharacter(it.data!!)
+                    bindMovie(it.data!!)
                     binding.progressBar.visibility = View.GONE
                     binding.movieCl.visibility = View.VISIBLE
                 }
 
                 Resource.Status.ERROR ->
-                    Toast.makeText(activity, it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, it.message, Toast.LENGTH_SHORT)
 
                 Resource.Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -57,9 +57,10 @@ class MovieDetailFragment : Fragment() {
         })
     }
 
-    private fun bindCharacter(movie: Movie) {
+    private fun bindMovie(movie: Movie) {
         binding.textTitle.text = movie.title
-        binding.textPopularity.text = movie.popularity.toString()
+        binding.textPopularity.text = " "+movie.popularity.toString()
+        binding.textVote.text = " "+movie.vote_average.toString()
         Glide.with(binding.root)
             .load(ApiConstants.IMAGE_API_PREFIX + movie.image)
             .into(binding.image)

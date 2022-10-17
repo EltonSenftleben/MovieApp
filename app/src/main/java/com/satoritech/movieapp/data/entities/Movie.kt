@@ -16,6 +16,10 @@ data class Movie(
     @Expose
     val title:String,
 
+    @SerializedName("vote_average")
+    @Expose
+    val vote_average: Double,
+
     @SerializedName("popularity")
     @Expose
     val popularity: Double,
